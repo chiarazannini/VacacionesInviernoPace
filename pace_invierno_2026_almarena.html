@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Almarena — Pace Vacaciones de Invierno</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --coral:#FF555E; --coral-dark:#E23E48; --ink:#1E1E24; --muted:#767685;
+    --border:#ECECEF; --card:#FAFAFA; --green:#1E9E6B; --gold:#B8860B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:#fff; font-family:'Inter',sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1100px; margin:0 auto; padding:24px;}
+  @media(min-width:768px){ .wrap{padding:40px;} }
+  .headline{font-family:'Poppins',sans-serif; font-weight:800;}
+  h1,h2{margin:0;}
+  p{margin:0;}
+
+  /* utility */
+  .flex{display:flex;} .flex-wrap{flex-wrap:wrap;} .flex-col{flex-direction:column;}
+  .items-center{align-items:center;} .items-baseline{align-items:baseline;} .items-start{align-items:flex-start;}
+  .justify-between{justify-content:space-between;} .justify-center{justify-content:center;}
+  .gap-1{gap:4px;} .gap-2{gap:8px;} .gap-3{gap:12px;} .gap-4{gap:16px;} .gap-6{gap:24px;}
+  .grid{display:grid;} .grid-cols-2{grid-template-columns:repeat(2,1fr);}
+  .flex-1{flex:1 1 0%;}
+  .rounded-xl{border-radius:12px;} .rounded-2xl{border-radius:16px;} .rounded-full{border-radius:999px;}
+  .overflow-hidden{overflow:hidden;} .overflow-x-auto{overflow-x:auto;}
+  .shadow-sm{box-shadow:0 1px 2px rgba(0,0,0,.05);}
+  .w-full{width:100%;}
+  .p-4{padding:16px;} .p-5{padding:20px;} .p-6{padding:24px;}
+  .px-4{padding-left:16px;padding-right:16px;} .py-3{padding-top:12px;padding-bottom:12px;}
+  .mb-1{margin-bottom:4px;} .mb-3{margin-bottom:12px;} .mb-4{margin-bottom:16px;}
+  .mb-5{margin-bottom:20px;} .mb-8{margin-bottom:32px;}
+  .mt-1{margin-top:4px;} .mt-2{margin-top:8px;} .mt-3{margin-top:12px;} .mt-4{margin-top:16px;}
+  .mt-5{margin-top:20px;} .mt-6{margin-top:24px;}
+  .pt-4{padding-top:16px;} .pt-5{padding-top:20px;} .pt-6{padding-top:24px;}
+  .pb-6{padding-bottom:24px;} .pb-2{padding-bottom:8px;}
+  .text-xs{font-size:12px;} .text-sm{font-size:14px;} .text-lg{font-size:18px;}
+  .text-xl{font-size:20px;} .text-2xl{font-size:24px;} .text-3xl{font-size:30px;}
+  .text-\[10px\]{font-size:10px;} .text-\[11px\]{font-size:11px;}
+  .font-medium{font-weight:500;} .font-semibold{font-weight:600;} .font-bold{font-weight:700;} .font-extrabold{font-weight:800;}
+  .uppercase{text-transform:uppercase;}
+  .tracking-wide{letter-spacing:.03em;} .tracking-widest{letter-spacing:.08em;} .tracking-\[0\.25em\]{letter-spacing:.25em;}
+  .whitespace-nowrap{white-space:nowrap;}
+  .max-w-lg{max-width:512px;} .max-w-2xl{max-width:672px;} .max-w-3xl{max-width:768px;}
+  .space-y-2\.5>*+*{margin-top:10px;}
+  table{border-collapse:collapse;}
+  .card{background:#fff; border:1px solid var(--border);}
+  .card-muted{background:var(--card); border:1px solid var(--border);}
+  .card-coral{background:#FFF3F0; border:1px solid rgba(255,85,94,.25);}
+  .muted{color:var(--muted);} .ink{color:var(--ink);} .coral{color:var(--coral);} .coral-dark{color:var(--coral-dark);}
+  .green{color:var(--green);} .gold{color:var(--gold);}
+
+  @media(min-width:768px){
+    .md\:grid-cols-2{grid-template-columns:repeat(2,1fr);}
+    .md\:grid-cols-3{grid-template-columns:repeat(3,1fr);}
+    .md\:grid-cols-4{grid-template-columns:repeat(4,1fr);}
+    .md\:p-6{padding:24px;}
+    .md\:text-3xl{font-size:30px;}
+  }
+  @media(min-width:640px){ .sm\:grid-cols-2{grid-template-columns:repeat(2,1fr);} }
+  @media(min-width:1024px){ .lg\:grid-cols-4{grid-template-columns:repeat(4,1fr);} }
+
+  .kpi-value{font-size:30px; font-weight:800; color:var(--ink);}
+  .section-title{color:var(--coral-dark); font-family:'Poppins',sans-serif; font-weight:800; font-size:20px; text-transform:uppercase; letter-spacing:.03em;}
+  .section-sub{color:var(--muted); font-size:12px; margin-top:4px;}
+
+  .cmp-table{width:100%; font-size:14px;}
+  .cmp-table th{text-align:right; padding:8px 0; font-weight:600;}
+  .cmp-table th:first-child{text-align:left;}
+  .cmp-table td{padding:8px; border-bottom:1px solid var(--border); white-space:nowrap;}
+  .cmp-table td:first-child{padding-left:0; text-align:left; white-space:normal;}
+  .cmp-table tr:last-child td{border-bottom:none;}
+  .cmp-table th:not(:first-child), .cmp-table td:not(:first-child){text-align:right;}
+
+  .heat-table td, .heat-table th{padding:6px 8px; font-size:10px; text-align:center; white-space:nowrap;}
+  .heat-table td:first-child, .heat-table th:first-child{text-align:left; font-size:12px; font-weight:600; padding-right:12px;}
+  .heat-table th{color:var(--muted); font-weight:600; padding-bottom:8px;}
+  .heat-table tr{border-bottom:1px solid var(--border);}
+
+  .promo-card{background:#fff; border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:0 1px 2px rgba(0,0,0,.05);}
+  .promo-badge{background:var(--coral); padding:12px 16px; display:flex; align-items:baseline; justify-content:space-between;}
+  .promo-badge .pct{color:#fff; font-weight:800; font-size:24px; font-family:'Poppins',sans-serif;}
+  .promo-badge .off{color:#fff; font-size:10px; text-transform:uppercase; letter-spacing:.08em; font-weight:700;}
+
+  .bar-bg{background:var(--border); height:10px; border-radius:999px; overflow:hidden;}
+  .bar-fill{height:100%;}
+
+  .pill{color:#fff; font-size:10px; text-transform:uppercase; letter-spacing:.03em; font-weight:700; padding:4px 12px; border-radius:999px; white-space:nowrap;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="mb-8 pb-6" style="border-bottom:3px solid var(--coral);">
+    <div class="coral text-xs uppercase tracking-[0.25em] font-bold mb-2">Almarena Apart &amp; Hotel Boutique</div>
+    <h1 class="headline text-2xl md:text-3xl uppercase ink">Pace vacaciones de invierno</h1>
+    <p class="muted text-sm mt-3 max-w-3xl">
+      Comparación día 0 a día 0: reservas de 2025 creadas hasta el 18/07/25 (inicio de esa temporada) vs. reservas de 2026 al día de hoy (17/07/26, inicio de esta temporada). 2026 viene <span class="coral font-bold">-40%</span>, concentrado casi todo en Suite Ejecutiva y Suite Superior.
+    </p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="flex flex-wrap gap-4 mb-8">
+    <div class="card rounded-2xl p-5 flex-1" style="min-width:150px;">
+      <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-3">Reservas</div>
+      <div class="flex items-baseline gap-2"><span class="text-3xl font-extrabold ink">85</span><span class="muted text-sm">vs 142</span></div>
+      <div class="flex items-center gap-1 mt-2"><span class="coral text-sm font-bold">▼ 40.1%</span><span class="muted text-xs">día 0 vs día 0</span></div>
+    </div>
+    <div class="card rounded-2xl p-5 flex-1" style="min-width:150px;">
+      <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-3">Room-nights</div>
+      <div class="flex items-baseline gap-2"><span class="text-3xl font-extrabold ink">305</span><span class="muted text-sm">vs 484</span></div>
+      <div class="flex items-center gap-1 mt-2"><span class="coral text-sm font-bold">▼ 37.0%</span><span class="muted text-xs">día 0 vs día 0</span></div>
+    </div>
+    <div class="card rounded-2xl p-5 flex-1" style="min-width:150px;">
+      <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-3">Pax</div>
+      <div class="flex items-baseline gap-2"><span class="text-3xl font-extrabold ink">283</span><span class="muted text-sm">vs 459</span></div>
+      <div class="flex items-center gap-1 mt-2"><span class="coral text-sm font-bold">▼ 38.3%</span><span class="muted text-xs">día 0 vs día 0</span></div>
+    </div>
+    <div class="card-coral rounded-2xl p-5 flex-1" style="min-width:220px;">
+      <div class="coral-dark text-[11px] uppercase tracking-widest font-semibold mb-3">2025 cerró en 225 reservas</div>
+      <div class="flex items-baseline gap-2"><span class="text-3xl font-extrabold ink">+83</span><span class="muted text-sm">pickup post-día 0</span></div>
+      <div class="flex items-center gap-1 mt-2"><span class="coral-dark text-xs">2026 todavía tiene ~16 días de ventana para sumar pickup equivalente</span></div>
+    </div>
+  </div>
+
+  <!-- Promociones -->
+  <div class="mb-8">
+    <div class="section-title mb-5">Promociones de invierno</div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="promo-card">
+        <div class="promo-badge"><span class="pct">15%</span><span class="off">OFF</span></div>
+        <div class="p-4">
+          <div class="coral-dark headline text-sm uppercase tracking-wide mb-1">Mini Invierno</div>
+          <div class="muted text-[11px] mb-3">Mín. 2-3 noches</div>
+          <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">26</span><span class="muted text-xs">reservas a hoy</span></div>
+        </div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-badge"><span class="pct">30%</span><span class="off">OFF</span></div>
+        <div class="p-4">
+          <div class="coral-dark headline text-sm uppercase tracking-wide mb-1">Full Invierno</div>
+          <div class="muted text-[11px] mb-3">Mín. 4+ noches</div>
+          <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">20</span><span class="muted text-xs">reservas a hoy</span></div>
+        </div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-badge"><span class="pct">30%</span><span class="off">OFF</span></div>
+        <div class="p-4">
+          <div class="coral-dark headline text-sm uppercase tracking-wide mb-1">Preventa Invierno</div>
+          <div class="muted text-[11px] mb-3">Reserva anticipada</div>
+          <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">13</span><span class="muted text-xs">reservas a hoy</span></div>
+        </div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-badge"><span class="pct">25%</span><span class="off">OFF</span></div>
+        <div class="p-4">
+          <div class="coral-dark headline text-sm uppercase tracking-wide mb-1">Vacaciones para 2</div>
+          <div class="muted text-[11px] mb-3">Suite Ejec./Sup./Studio · mín. 2 noches</div>
+          <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">13</span><span class="muted text-xs">reservas a hoy</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="muted text-xs mt-4">
+      Mini (15%) y Full (30%) son la estructura fija de este año. Vacaciones para 2 (25%) es nueva — apunta directo al segmento de parejas, que es el que más se retrajo (ver más abajo) — y aun así solo sumó 13 reservas hasta hoy.
+    </p>
+  </div>
+
+  <!-- Reservas por tipo de habitación -->
+  <div class="card-muted rounded-2xl p-5 md:p-6 mb-8">
+    <div class="section-title">Reservas por tipo de habitación</div>
+    <div class="section-sub mb-5">Categorías base casi planas, categorías top colapsan</div>
+    <table class="cmp-table">
+      <thead><tr><th>Categoría</th><th class="muted">2025</th><th class="coral-dark">2026</th><th class="ink">Var.</th></tr></thead>
+      <tbody id="rooms-tbody"></tbody>
+    </table>
+    <p class="muted text-xs mt-4">
+      <span class="coral-dark" style="font-weight:600;">Suite Ejecutiva + Suite Superior</span> concentran el 56% de toda la caída (-32 de -57 reservas). <span class="green" style="font-weight:600;">Residencia, Penthouse Almarena, Depto. Grande y Suite Almarena</span> están exactamente igual que el año pasado. Habitaciones físicas distintas que rotaron: Suite Ejecutiva 5 (vs. 8 en 2025), Suite Superior 3 (vs. 8) — inventario confirmado sin cambios reales por el hotel.
+    </p>
+  </div>
+
+  <!-- Parejas vs Familias -->
+  <div class="card-muted rounded-2xl p-5 md:p-6 mb-8">
+    <div class="section-title">Diferenciación por segmento (Parejas vs Familias)</div>
+    <div class="section-sub mb-5">Comparando día 0 a día 0: reservas 2025 creadas hasta el 18/07/25 vs. reservas 2026 a hoy (17/07/26)</div>
+    <table class="cmp-table">
+      <thead><tr><th>Categoría</th><th class="muted">2025</th><th class="coral-dark">2026</th><th class="ink">Var.</th></tr></thead>
+      <tbody id="segmento-tbody"></tbody>
+    </table>
+    <div class="grid md:grid-cols-3 gap-4 mt-5">
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">Pax promedio por reserva</div>
+        <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">3,33</span><span class="muted text-sm">vs 3,23</span><span class="green text-sm font-bold">▲ 3%</span></div>
+      </div>
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">Noches promedio por reserva</div>
+        <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">3,59</span><span class="muted text-sm">vs 3,41</span><span class="green text-sm font-bold">▲ 5%</span></div>
+      </div>
+      <div class="card-coral rounded-xl p-4">
+        <div class="coral-dark text-[11px] uppercase tracking-widest font-semibold mb-1">"Vacaciones para 2" (promo nueva)</div>
+        <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">13 res.</span><span class="coral-dark text-sm font-medium">25% off, la más agresiva</span></div>
+      </div>
+    </div>
+    <p class="muted text-xs mt-4">
+      En 2025 la mitad de las reservas eran de parejas y la mitad de familias/grupos (71 y 71). Este año quedó 30 vs. 55 — <span class="coral-dark" style="font-weight:600;">las parejas cayeron -58%</span> mientras <span class="green" style="font-weight:600;">las familias/grupos solo -23%</span>, con estadías incluso más largas que el año pasado. El viaje en pareja parece más postergable que las vacaciones de invierno familiares, atadas al receso escolar.
+    </p>
+  </div>
+
+  <!-- Heatmap -->
+  <div class="card-muted rounded-2xl p-5 md:p-6 mb-8">
+    <div class="section-title">Mapa de calor: Apart vs. Hotel — pace día 0 a día 0</div>
+    <div class="overflow-x-auto mt-5">
+      <table class="heat-table" style="border-collapse:collapse;">
+        <thead><tr><th>Ala / Año</th><script>document.write(Array.from({length:17},(_,i)=>`<th>Día ${i+1}</th>`).join(''))</script></tr></thead>
+        <tbody id="heat-tbody"></tbody>
+      </table>
+    </div>
+    <div class="flex items-center gap-2 mt-4">
+      <span class="muted text-[11px]">0%</span>
+      <div style="background:linear-gradient(90deg, rgb(255,255,240), rgb(255,85,94)); height:10px; width:140px; border-radius:6px;"></div>
+      <span class="muted text-[11px]">100%</span>
+    </div>
+    <p class="muted text-[11px] mt-2">
+      2025 acá NO es el resultado final — es reconstruido reserva por reserva usando solo las que ya existían al 18/07/25 (mismo corte día-0 que el resto del dashboard), para comparar contra el pace real de 2026 a hoy. Promedios sobre 16 días (17/7-1/8), consistentes con el K011.
+    </p>
+    <div class="grid md:grid-cols-2 gap-4 mt-4">
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">Apart — ocupación promedio (pace, 16 días)</div>
+        <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">44,1%</span><span class="muted text-sm">vs 55,9%</span><span class="coral text-sm font-bold">▼ 21%</span></div>
+        <div class="muted text-[11px] mt-1">Pico: 85,0% (2025 pace) → 67,5% (2026)</div>
+      </div>
+      <div class="card-coral rounded-xl p-4">
+        <div class="coral-dark text-[11px] uppercase tracking-widest font-semibold mb-1">Hotel — ocupación promedio (pace, 16 días)</div>
+        <div class="flex items-baseline gap-2"><span class="text-xl font-extrabold ink">9,2%</span><span class="muted text-sm">vs 37,8%</span><span class="coral text-sm font-bold">▼ 76%</span></div>
+        <div class="muted text-[11px] mt-1">Pico: 84,2% (2025 pace) → 15,8% (2026)</div>
+      </div>
+    </div>
+    <p class="muted text-xs mt-4">
+      Comparando el mismo punto en ambos años: <span class="ink" style="font-weight:600;">Apart cae -21%</span> en ocupación promedio, mientras <span class="coral-dark" style="font-weight:600;">Hotel (Suites) cae -76%</span>. Es menos extremo que comparar contra el cierre final de 2025, pero la brecha se mantiene: el Hotel sigue cayendo mucho más que el Apart, en línea con la caída de reservas de Suite Ejecutiva y Suite Superior.
+    </p>
+    <div class="mt-4 pt-4" style="border-top:1px solid var(--border);">
+      <p class="coral-dark text-xs font-semibold mb-1">Contexto: cuánto sumó 2025 después de este mismo punto</p>
+      <p class="muted text-xs">
+        2025 en su propio día 0 estaba en 55,9% (Apart) y 37,8% (Hotel) — terminó la ventana en 68,8% y 61,8%. Ese es el margen de pickup que 2026 todavía tiene por delante en las próximas semanas, sobre todo en el Hotel, que fue el ala que más creció después del día 0 el año pasado (37,8%→61,8%, +24 puntos).
+      </p>
+    </div>
+  </div>
+
+  <!-- Canal -->
+  <div class="card-muted rounded-2xl p-5 md:p-6 mb-8">
+    <div class="section-title">Canal (día 0 vs día 0)</div>
+    <div class="section-sub mb-5">Teléfono es, por lejos, el más golpeado</div>
+    <div class="max-w-lg">
+      <table class="cmp-table">
+        <thead><tr><th>Categoría</th><th class="muted">2025</th><th class="coral-dark">2026</th><th class="ink">Var.</th></tr></thead>
+        <tbody id="canal-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADR -->
+  <div class="card-muted rounded-2xl p-5 md:p-6 mb-8">
+    <div class="section-title mb-5">KPIs de vacaciones de invierno OTB</div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">Tarifa Promedio</div>
+        <div class="text-2xl font-extrabold ink">US$ 177,42</div>
+        <div class="muted text-[11px] mt-1">Room Revenue ÷ noches netas (309 − 10 House Use)</div>
+      </div>
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">Room Revenue</div>
+        <div class="text-2xl font-extrabold ink">US$ 53.050</div>
+      </div>
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">REVPAR</div>
+        <div class="text-2xl font-extrabold ink">US$ 56,20</div>
+      </div>
+      <div class="card rounded-xl p-4">
+        <div class="muted text-[11px] uppercase tracking-widest font-semibold mb-1">Ocupación</div>
+        <div class="text-2xl font-extrabold ink">32,73%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competencia -->
+  <div class="card-muted rounded-2xl p-5 md:p-6 mb-8">
+    <div class="section-title">Posicionamiento vs. mercado</div>
+    <div class="section-sub mb-5">Paquete 7 noches, Suite Ejecutiva/Departamento/Residencia · comparado contra ~14 hoteles de Pinamar, Cariló y Mar de las Pampas</div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <table class="cmp-table" style="max-width:420px;">
+        <thead><tr><th>Modalidad</th><th class="muted">Gap 2025</th><th class="coral-dark">Gap 2026</th></tr></thead>
+        <tbody>
+          <tr><td>Para 2</td><td class="muted">-37.0%</td><td class="coral-dark" style="font-weight:500;">-39.5%</td></tr>
+          <tr><td>Para 4</td><td class="muted">-37.7%</td><td class="coral-dark" style="font-weight:500;">-34.1%</td></tr>
+          <tr><td>Para 6</td><td class="muted">-33.0%</td><td class="coral-dark" style="font-weight:500;">-33.2%</td></tr>
+        </tbody>
+      </table>
+      <div class="flex flex-col justify-center gap-3">
+        <div>
+          <div class="muted text-[11px] uppercase tracking-widest font-semibold">Suba de tarifa 2025→2026</div>
+          <div class="flex items-baseline gap-3 mt-1">
+            <span class="text-lg font-extrabold ink">Almarena +18,0%</span>
+            <span class="text-lg font-extrabold coral-dark">Mercado +37,2%</span>
+          </div>
+        </div>
+        <p class="muted text-xs">
+          El mercado subió el doble que Almarena. El gap de precio vs. competencia (negativo = Almarena más competitivo) se mantuvo o mejoró levemente en las tres modalidades. La caída de reservas no viene de ahí.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-6 pt-6" style="border-top:1px solid var(--border);">
+      <div class="ink text-sm font-semibold mb-3">Tarifa de mercado por destino — Cariló, Pinamar y Mar de las Pampas</div>
+      <div class="grid md:grid-cols-3 gap-6" id="compset-grid"></div>
+      <p class="muted text-xs mt-4">
+        Almarena es la opción más competitiva en las tres modalidades (2/4/6 pax) frente a los tres destinos — desde 0,5% más competitiva que la más cercana (Pinamar, Para 2) hasta 38% más competitiva que la más cara (Cariló, Para 2).
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const CORAL = "#FF555E", CORAL_DARK = "#E23E48", INK = "#1E1E24", MUTED = "#767685",
+      BORDER = "#ECECEF", GREEN = "#1E9E6B", GOLD = "#B8860B";
+
+function pctDelta(a, b){ return a > 0 ? ((b - a) / a) * 100 : (b > 0 ? 100 : 0); }
+
+function buildCompareRows(rows, max){
+  return rows.map(r => {
+    const p = pctDelta(r.v25, r.v26);
+    const w25 = max > 0 ? (r.v25/max)*100 : 0;
+    const w26 = max > 0 ? (r.v26/max)*100 : 0;
+    const varColor = r.v25 === 0 ? GOLD : (p < 0 ? CORAL : GREEN);
+    const varText = r.v25 === 0 ? "nueva" : `${p>0?"+":""}${p.toFixed(0)}%`;
+    return `<tr>
+      <td>${r.label}</td>
+      <td style="background:linear-gradient(90deg, transparent ${100-w25}%, #76767a1a ${100-w25}%); color:${MUTED};">${r.v25}</td>
+      <td style="background:linear-gradient(90deg, transparent ${100-w26}%, ${r.v25===0?'#B8860B22':'#FF555E22'} ${100-w26}%); color:${INK}; font-weight:500;">${r.v26}</td>
+      <td style="color:${varColor}; font-weight:600;">${varText}</td>
+    </tr>`;
+  }).join('');
+}
+
+const rooms = [
+  { label: "Suite Ejecutiva", v25: 25, v26: 6 },
+  { label: "Studio (+ Bosque)", v25: 12, v26: 11 },
+  { label: "SS (+ SSP)", v25: 16, v26: 3 },
+  { label: "Studio Junior", v25: 5, v26: 3 },
+  { label: "Departamento", v25: 28, v26: 17 },
+  { label: "Studio Superior", v25: 6, v26: 2 },
+  { label: "Departamento Superior", v25: 7, v26: 6 },
+  { label: "Departamento Grande", v25: 5, v26: 5 },
+  { label: "Suite Almarena", v25: 2, v26: 2 },
+  { label: "Studio Almarena", v25: 5, v26: 3 },
+  { label: "Residencia", v25: 12, v26: 12 },
+  { label: "Residencia Almarena", v25: 6, v26: 4 },
+  { label: "Penthouse", v25: 6, v26: 4 },
+  { label: "Penthouse Almarena", v25: 7, v26: 7 },
+];
+document.getElementById('rooms-tbody').innerHTML = buildCompareRows(rooms, Math.max(...rooms.map(r=>Math.max(r.v25,r.v26))));
+
+const segmento = [
+  { label: "Parejas (~2 pax): Suites + Studios", v25: 71, v26: 30 },
+  { label: "Familias / grupos (3,5+ pax): Deptos, Residencias, Penthouses", v25: 71, v26: 55 },
+];
+document.getElementById('segmento-tbody').innerHTML = buildCompareRows(segmento, Math.max(...segmento.map(r=>Math.max(r.v25,r.v26))));
+
+const canal = [
+  { label: "WhatsApp", v25: 64, v26: 41 },
+  { label: "Teléfono", v25: 29, v26: 6 },
+  { label: "Sitio Web", v25: 22, v26: 19 },
+  { label: "E-mail", v25: 12, v26: 7 },
+  { label: "Booking.com", v25: 5, v26: 4 },
+  { label: "Otros", v25: 10, v26: 8 },
+];
+document.getElementById('canal-tbody').innerHTML = buildCompareRows(canal, Math.max(...canal.map(r=>Math.max(r.v25,r.v26))));
+
+// Heatmap
+const heatApart25 = [17.5, 32.5, 45.0, 75.0, 85.0, 82.5, 85.0, 80.0, 72.5, 60.0, 60.0, 62.5, 57.5, 47.5, 27.5, 5.0, 7.5];
+const heatApart26 = [10.0, 20.0, 30.0, 62.5, 67.5, 67.5, 62.5, 65.0, 60.0, 52.5, 55.0, 50.0, 40.0, 35.0, 20.0, 7.5, 7.5];
+const heatHotel25 = [36.8, 68.4, 47.4, 73.7, 78.9, 84.2, 84.2, 36.8, 21.1, 15.8, 10.5, 10.5, 10.5, 10.5, 10.5, 5.3, 5.3];
+const heatHotel26 = [5.3, 10.5, 5.3, 10.5, 10.5, 15.8, 10.5, 10.5, 15.8, 10.5, 5.3, 10.5, 10.5, 10.5, 0.0, 5.3, 0.0];
+
+function heatColor(v, max){
+  const t = Math.min(v/max, 1);
+  const r = 255, g = Math.round(255 - t*(255-85)), b = Math.round(240 - t*(240-94));
+  return `rgb(${r}, ${g}, ${b})`;
+}
+function heatRow(label, values, max){
+  const cells = values.map(v => {
+    const bg = heatColor(v, max);
+    const textColor = v/max > 0.55 ? '#fff' : INK;
+    return `<td style="background:${bg}; color:${textColor};">${v.toFixed(0)}%</td>`;
+  }).join('');
+  return `<tr><td>${label}</td>${cells}</tr>`;
+}
+document.getElementById('heat-tbody').innerHTML =
+  heatRow("Apart (40 hab.) — 2025 (pace)", heatApart25, 100) +
+  heatRow("Apart (40 hab.) — 2026 (hoy)", heatApart26, 100) +
+  heatRow("Hotel (19 hab.) — 2025 (pace)", heatHotel25, 100) +
+  heatRow("Hotel (19 hab.) — 2026 (hoy)", heatHotel26, 100);
+
+// Compset por destino
+const compsetDestino = [
+  { pax: "Para 2", items: [
+    { nombre: "Almarena", valor: 150055, destacado: true },
+    { nombre: "Pinamar", valor: 150851 },
+    { nombre: "Mar de las Pampas", valor: 181358 },
+    { nombre: "Cariló", valor: 242135 },
+  ]},
+  { pax: "Para 4", items: [
+    { nombre: "Almarena", valor: 228085, destacado: true },
+    { nombre: "Mar de las Pampas", valor: 281640 },
+    { nombre: "Pinamar", valor: 289924 },
+    { nombre: "Cariló", valor: 339593 },
+  ]},
+  { pax: "Para 6", items: [
+    { nombre: "Almarena", valor: 307609, destacado: true },
+    { nombre: "Mar de las Pampas", valor: 376769 },
+    { nombre: "Cariló", valor: 407096 },
+    { nombre: "Pinamar", valor: 436120 },
+  ]},
+];
+document.getElementById('compset-grid').innerHTML = compsetDestino.map(grupo => {
+  const max = Math.max(...grupo.items.map(i => i.valor));
+  const rows = grupo.items.map(it => {
+    const color = it.destacado ? CORAL_DARK : INK;
+    const weight = it.destacado ? 700 : 400;
+    const barColor = it.destacado ? CORAL : "#C7C7CC";
+    const width = (it.valor/max)*100;
+    return `<div style="margin-top:10px;">
+      <div class="flex justify-between text-xs mb-1">
+        <span style="color:${color}; font-weight:${weight};">${it.nombre}</span>
+        <span class="muted">$${it.valor.toLocaleString('es-AR')}</span>
+      </div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${width}%; background:${barColor};"></div></div>
+    </div>`;
+  }).join('');
+  return `<div>
+    <div class="coral-dark headline text-sm uppercase tracking-wide mb-3">${grupo.pax}</div>
+    ${rows}
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>
